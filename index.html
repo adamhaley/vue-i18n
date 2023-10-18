@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue I18n</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-i18n@8"></script>
+</head>
+<body>
+
+
+<div id="app">
+    <p>{{ $t("message.hello") }}</p>
+</div>
+
+
+<script>
+    // Ready translated locale messages
+    const messages = {
+        en: {
+            message: {
+                hello: 'hello world'
+            }
+        },
+        ja: {
+            message: {
+                hello: 'こんにちは、世界'
+            }
+        }
+    }
+
+    // Create VueI18n instance with options
+    const i18n = new VueI18n({
+        locale: 'ja', // set locale
+        messages, // set locale messages
+    })
+
+
+    // Create a Vue instance with `i18n` option
+    new Vue({ i18n }).$mount('#app')
+
+    // Now the app has started!
+
+</script>
+</body>
+</html>
