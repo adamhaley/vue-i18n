@@ -9,30 +9,32 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-i18n@8"></script>
+    <!--pull in axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
 </head>
 <body>
 
 
 <div id="app">
-    <p>{{ $t("message.hello") }}</p>
+    <p>{{ $t(":name added successfully") }}</p>
 </div>
 
 
 <script>
     // Ready translated locale messages
-    const messages = {
-        en: {
-            message: {
-                hello: 'hello world'
-            }
-        },
-        ja: {
-            message: {
-                hello: 'こんにちは、世界'
-            }
-        }
-    }
 
+    const messages = [];
+    let languages = ['ar','es','ko','ur','zh'];
+    //use axios to load json from lang/
+    languages.forEach((lang) => {
+        axios.get('/lang/'+lang+'.json').then(response => {
+            messages[lang] = response.data;
+        });
+
+    });
+    console.log(messages);
     // Create VueI18n instance with options
     const i18n = new VueI18n({
         locale: 'ja', // set locale
